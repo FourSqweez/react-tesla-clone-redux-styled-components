@@ -1,18 +1,19 @@
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu'
 import CloseSharpIcon from '@material-ui/icons/CloseSharp'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { selectCars } from '../features/car/carSlice'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-scroll'
+import { BgContext } from '../App'
 
 export default function Header() {
-	const [showBurger, setShowBurger] = useState(false)
+	const { showBurger, setShowBurger } = useContext(BgContext)
 	const cars = useSelector(selectCars)
 
 	return (
 		<Container>
-			<Link to={`section0`} smooth duration={800} spy={true}>
+			<Link to={`section0`} smooth duration={800} spy={true} offset={50}>
 				<img src="/images/logo.svg" alt="" />
 			</Link>
 			<Menu>
@@ -28,10 +29,10 @@ export default function Header() {
 							{car}
 						</Link>
 					))}
-				<Link to="solar-roof" smooth duration={800}>
+				<Link to="solar-roof" smooth duration={800} offset={50}>
 					Solar Panels
 				</Link>
-				<Link to="solar-panels" smooth duration={800}>
+				<Link to="solar-panels" smooth duration={800} offset={50}>
 					Solar Roof
 				</Link>
 			</Menu>
@@ -55,6 +56,7 @@ export default function Header() {
 								key={index}
 								smooth
 								duration={800}
+								offset={50}
 							>
 								{car}
 							</Link>
@@ -110,7 +112,7 @@ const Menu = styled.div`
 		cursor: pointer;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 1020px) {
 		display: none;
 	}
 `
