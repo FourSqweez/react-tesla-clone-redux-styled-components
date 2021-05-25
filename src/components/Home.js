@@ -4,9 +4,11 @@ import Section from './Section'
 
 export default function Home() {
 	const [infos, setInfos] = useState([])
+	const [fetchDone, setFetchDone] = useState(false)
 	const getData = async () => {
 		const results = await fetch('carinfo.json').then((res) => res.json())
 		setInfos(results)
+		setFetchDone(true)
 	}
 
 	useEffect(() => {
@@ -25,30 +27,36 @@ export default function Home() {
 						rightBtnText="Existing inventory"
 					/>
 				))}
-			<Section
-				title="Lowest Cost Solar Panels in America"
-				description="Money-back guarantee"
-				backgroundImg="solar-panel.jpg"
-				leftBtnText="Order now"
-				rightBtnText="Learn more"
-			/>
-			<Section
-				title="Solar for New Roofs"
-				description="Solar Roofs Costs Less Than a New Roof Plus Solar Panels"
-				backgroundImg="solar-roof.jpg"
-				leftBtnText="Order now"
-				rightBtnText="Learn more"
-			/>
-			<Section
-				title="Accessories"
-				description=""
-				backgroundImg="accessories.jpg"
-				leftBtnText="Shop now"
-			/>
+
+			{fetchDone && (
+				<>
+					<Section
+						title="Lowest Cost Solar Panels in America"
+						description="Money-back guarantee"
+						backgroundImg="solar-panel.jpg"
+						leftBtnText="Order now"
+						rightBtnText="Learn more"
+					/>
+					<Section
+						title="Solar for New Roofs"
+						description="Solar Roofs Costs Less Than a New Roof Plus Solar Panels"
+						backgroundImg="solar-roof.jpg"
+						leftBtnText="Order now"
+						rightBtnText="Learn more"
+					/>
+					<Section
+						title="Accessories"
+						description=""
+						backgroundImg="accessories.jpg"
+						leftBtnText="Shop now"
+					/>
+				</>
+			)}
 		</Container>
 	)
 }
 
 const Container = styled.div`
 	height: 100vh;
+	scroll-snap-type: mandatory;
 `
