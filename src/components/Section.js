@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import Fade from 'react-reveal'
+import { useContext } from 'react'
+import { BgContext } from '../App'
 
 export default function Section({
 	title,
@@ -8,8 +10,10 @@ export default function Section({
 	leftBtnText,
 	rightBtnText,
 }) {
+	const { showBurger } = useContext(BgContext)
+
 	return (
-		<Wrap imgUrl={backgroundImg}>
+		<Wrap imgUrl={backgroundImg} showBurger={showBurger}>
 			<Fade bottom>
 				<ItemText>
 					<h1>{title}</h1>
@@ -41,21 +45,26 @@ export default function Section({
 	)
 }
 
+const handleShowBurger = (show) => {
+	if (show) {
+		return '-webkit-filter: brightness(50%); filter: brightness(50%);'
+	}
+}
+
 const Wrap = styled.div`
 	z-index: 10;
 	width: 100vw;
 	height: 100vh;
-	background-image: url(${({ imgUrl }) => `images/${imgUrl}`});
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
+	background-image: url(${({ imgUrl }) => `images/${imgUrl}`});
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	scroll-snap-align: start;
+	${({ showBurger }) => handleShowBurger(showBurger)};
 `
-
 const ItemText = styled.div`
 	padding-top: 15vh;
 	text-align: center;
