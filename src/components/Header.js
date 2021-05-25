@@ -2,8 +2,9 @@ import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu'
 import CloseSharpIcon from '@material-ui/icons/CloseSharp'
 import { useState } from 'react'
-import carSlice, { selectCars } from '../features/car/carSlice'
+import { selectCars } from '../features/car/carSlice'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-scroll'
 
 export default function Header() {
 	const [showBurger, setShowBurger] = useState(false)
@@ -11,16 +12,28 @@ export default function Header() {
 
 	return (
 		<Container>
-			<a>
+			<Link to={`section0`} smooth duration={800} spy={true}>
 				<img src="/images/logo.svg" alt="" />
-			</a>
+			</Link>
 			<Menu>
 				{cars &&
 					cars.map((car, index) => (
-						<a key={index} href="#">
+						<Link
+							to={`section${index}`}
+							key={index}
+							smooth
+							duration={800}
+							spy={true}
+						>
 							{car}
-						</a>
+						</Link>
 					))}
+				<Link to="solar-roof" smooth duration={800}>
+					Solar Panels
+				</Link>
+				<Link to="solar-panels" smooth duration={800}>
+					Solar Roof
+				</Link>
 			</Menu>
 
 			<RightMenu>
@@ -36,7 +49,15 @@ export default function Header() {
 				{cars &&
 					cars.map((car, index) => (
 						<li key={index}>
-							<a href="#">{car}</a>
+							<Link
+								onClick={() => setShowBurger(false)}
+								to={`section${index}`}
+								key={index}
+								smooth
+								duration={800}
+							>
+								{car}
+							</Link>
 						</li>
 					))}
 				<li>
@@ -70,6 +91,9 @@ const Container = styled.div`
 	left: 0;
 	right: 0;
 	z-index: 1;
+	a {
+		cursor: pointer;
+	}
 `
 
 const Menu = styled.div`
@@ -83,6 +107,7 @@ const Menu = styled.div`
 		text-transform: uppercase;
 		padding: 0 10px;
 		flex-wrap: nowrap;
+		cursor: pointer;
 	}
 
 	@media (max-width: 768px) {
@@ -125,6 +150,7 @@ const BurgerNav = styled.div`
 
 		a {
 			font-weight: 600;
+			cursor: pointer;
 		}
 	}
 `

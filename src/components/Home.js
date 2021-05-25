@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Section from './Section'
+import { Element } from 'react-scroll'
 
 export default function Home() {
 	const [infos, setInfos] = useState([])
@@ -18,32 +19,39 @@ export default function Home() {
 		<Container>
 			{infos &&
 				infos.map((info) => (
-					<Section
-						key={info.id}
-						title={info.title}
-						description={info.description}
-						backgroundImg={info.image}
-						leftBtnText="Custom order"
-						rightBtnText="Existing inventory"
-					/>
+					<Element id={`section${info.id}`} key={info.id}>
+						<Section
+							key={info.id}
+							title={info.title}
+							description={info.description}
+							backgroundImg={info.image}
+							leftBtnText="Custom order"
+							rightBtnText="Existing inventory"
+						/>
+					</Element>
 				))}
 
 			{fetchDone && (
 				<>
-					<Section
-						title="Lowest Cost Solar Panels in America"
-						description="Money-back guarantee"
-						backgroundImg="solar-panel.jpg"
-						leftBtnText="Order now"
-						rightBtnText="Learn more"
-					/>
-					<Section
-						title="Solar for New Roofs"
-						description="Solar Roofs Costs Less Than a New Roof Plus Solar Panels"
-						backgroundImg="solar-roof.jpg"
-						leftBtnText="Order now"
-						rightBtnText="Learn more"
-					/>
+					<Element id="solar-roof">
+						<Section
+							title="Solar for New Roofs"
+							description="Solar Roofs Costs Less Than a New Roof Plus Solar Panels"
+							backgroundImg="solar-roof.jpg"
+							leftBtnText="Order now"
+							rightBtnText="Learn more"
+						/>
+					</Element>
+					<Element id="solar-panels">
+						<Section
+							title="Lowest Cost Solar Panels in America"
+							description="Money-back guarantee"
+							backgroundImg="solar-panel.jpg"
+							leftBtnText="Order now"
+							rightBtnText="Learn more"
+						/>
+					</Element>
+
 					<Section
 						title="Accessories"
 						description=""

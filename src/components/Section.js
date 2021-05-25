@@ -18,12 +18,22 @@ export default function Section({
 			</Fade>
 
 			<Buttons>
-				<Fade bottom>
-					<ButtonGroup>
-						<LeftButton>{leftBtnText}</LeftButton>
-						{rightBtnText && <RightButton>{rightBtnText}</RightButton>}
-					</ButtonGroup>
-				</Fade>
+				<ButtonGroup>
+					{rightBtnText ? (
+						<Fade left>
+							<LeftButton>{leftBtnText}</LeftButton>
+						</Fade>
+					) : (
+						<Fade bottom>
+							<LeftButton>{leftBtnText}</LeftButton>
+						</Fade>
+					)}
+					{rightBtnText && (
+						<Fade right>
+							<RightButton>{rightBtnText}</RightButton>
+						</Fade>
+					)}
+				</ButtonGroup>
 
 				<DownArrow src="/images/down-arrow.svg" />
 			</Buttons>
