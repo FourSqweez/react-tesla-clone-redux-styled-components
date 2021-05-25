@@ -1,17 +1,23 @@
 import styled from 'styled-components'
 
-export default function Section() {
+export default function Section({
+	title,
+	description,
+	backgroundImg,
+	leftBtnText,
+	rightBtnText,
+}) {
 	return (
-		<Wrap>
+		<Wrap imgUrl={backgroundImg}>
 			<ItemText>
-				<h1>Model S</h1>
-				<p>Order Online for Touchless Delivery</p>
+				<h1>{title}</h1>
+				<p>{description}</p>
 			</ItemText>
 
 			<Buttons>
 				<ButtonGroup>
-					<LeftButton>Custom Order</LeftButton>
-					<RightButton>Existing Inventory</RightButton>
+					<LeftButton>{leftBtnText}</LeftButton>
+					{rightBtnText && <RightButton>{rightBtnText}</RightButton>}
 				</ButtonGroup>
 
 				<DownArrow src="/images/down-arrow.svg" />
@@ -23,7 +29,7 @@ export default function Section() {
 const Wrap = styled.div`
 	width: 100vw;
 	height: 100vh;
-	background-image: url('/images/model-s.jpg');
+	background-image: url(${({ imgUrl }) => `images/${imgUrl}`});
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
