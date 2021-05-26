@@ -1,47 +1,23 @@
-import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Section from './Section'
 import { Element } from 'react-scroll'
+import { carInfos } from '../carInfos'
 
 export default function Home() {
 	return (
 		<Container>
-			<Element id="section0">
-				<Section
-					title="Model S"
-					description="Order Online for Touchless Delivery"
-					backgroundImg="model-s.jpg"
-					leftBtnText="Custom order"
-					rightBtnText="Existing inventory"
-				/>
-			</Element>
-			<Element id="section1">
-				<Section
-					title="Model 3"
-					description="Order Online for Touchless Delivery"
-					backgroundImg="model-3.jpg"
-					leftBtnText="Custom order"
-					rightBtnText="Existing inventory"
-				/>
-			</Element>
-			<Element id="section2">
-				<Section
-					title="Model X"
-					description="Order Online for Touchless Delivery"
-					backgroundImg="model-x.jpg"
-					leftBtnText="Custom order"
-					rightBtnText="Existing inventory"
-				/>
-			</Element>
-			<Element id="section3">
-				<Section
-					title="Model Y"
-					description="Order Online for Touchless Delivery"
-					backgroundImg="model-y.jpg"
-					leftBtnText="Custom order"
-					rightBtnText="Existing inventory"
-				/>
-			</Element>
+			{carInfos &&
+				carInfos.map((info) => (
+					<Element id={`section${info.id}`} key={info.id}>
+						<Section
+							title={info.title}
+							description={info.description}
+							backgroundImg={info.image}
+							leftBtnText="Custom order"
+							rightBtnText="Existing inventory"
+						/>
+					</Element>
+				))}
 
 			<Element id="solar-roof">
 				<Section
