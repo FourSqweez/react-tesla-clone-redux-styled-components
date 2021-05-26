@@ -47,7 +47,7 @@ export default function Section({
 
 const handleShowBurger = (show) => {
 	if (show) {
-		return '-webkit-filter: brightness(50%); filter: brightness(50%);'
+		return '-webkit-filter: brightness(50%); filter: brightness(50%)g;'
 	}
 }
 
